@@ -1,2 +1,12 @@
 fastapi
 uvicorn
+pydantic-settings
+sqlalchemy
+alembic
+argon2-cffi
+pyjwt
+cryptography
+email-validator
+httpx
+pytest
+psycopg[binary]
