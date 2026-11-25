@@ -12,6 +12,11 @@ test("safeNext rejects external destinations", () => {
 
 test("route groups match the phase 2 map", () => {
   assert.equal(isProtectedPath("/dashboard/privacy"), true);
+  assert.equal(isProtectedPath("/dashboard/period-tracker"), true);
+  assert.equal(isProtectedPath("/dashboard/symptoms"), true);
+  assert.equal(isProtectedPath("/dashboard/mental-wellness"), true);
+  assert.equal(isProtectedPath("/dashboard/health-reports"), true);
+  assert.equal(isProtectedPath("/dashboard/reminders"), true);
   assert.equal(isProtectedPath("/admin/users"), true);
   assert.equal(isProtectedPath("/login"), false);
   assert.equal(isCredentialPath("/login"), true);

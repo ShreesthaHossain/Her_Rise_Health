@@ -34,9 +34,13 @@ def account_engine():
     return _engine
 
 
-def get_account_db() -> Generator[Session, None, None]:
+def open_account_session() -> Session:
     account_engine()
-    db = _session_factory()
+    return _session_factory()
+
+
+def get_account_db() -> Generator[Session, None, None]:
+    db = open_account_session()
     try:
         yield db
     finally:

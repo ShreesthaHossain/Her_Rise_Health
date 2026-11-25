@@ -65,3 +65,20 @@ values ('<auth user uuid>', 'admin');
 The account export includes the profile, preferences, consent history, and deletion request. It does not include cycle logs or symptom notes from the Vite database. A deletion request stays `requested` until the admin completion route deletes the Auth user and the owned account rows.
 
 Row level security is defined in the migration. Two-user checks for the API are in `apps/api/tests/test_phase2.py`. A live Supabase project is still required before a real person can register.
+
+## Phase 3 tracking
+
+Apply `supabase/migrations/20261125100000_phase3_tracking.sql` after the Phase 2 account migration. The API does not run it on startup.
+
+Signed-in Next.js pages call FastAPI with the Supabase access token:
+
+- `/dashboard` shows only records saved on that account
+- `/dashboard/period-tracker` saves period dates, flow, and pain
+- `/dashboard/symptoms` saves a symptom journal
+- `/dashboard/mental-wellness` saves one daily check-in
+- `/dashboard/health-reports` downloads a CSV or a plain PDF for the signed-in user
+- `/dashboard/reminders` lists in-app reminders
+
+Estimates stay labeled as estimates. The journal does not diagnose PCOS or any other condition. Reminders are not emailed. The Vite app at port 5173 still uses its own SQLite log; a bearer token is what selects the Phase 3 tables.
+
+The account database must be reachable at `ACCOUNT_DATABASE_URL` before a saved period appears in Supabase. Tests for the calculations and ownership rules use a local SQLite file: `python -m pytest` from `apps/api`.

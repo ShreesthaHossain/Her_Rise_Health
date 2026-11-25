@@ -3,27 +3,27 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BookOpen, CalendarDays, House, MapPin, MessageCircle, Moon, Sun, UserRound } from "lucide-react";
+import { Activity, Bell, CalendarDays, FileText, HeartPulse, House, Moon, Sun, UserRound } from "lucide-react";
 import { useCopy, useLocale, useTheme } from "@/components/providers";
 import { accountFetch, type AccountProfile } from "@/lib/api/account";
+import { trackingCopy } from "@/lib/tracking-copy";
 import { createClient, supabaseConfigured } from "@/lib/supabase/client";
-
-const items = [
-  { href: "/dashboard", label: "Home", icon: House },
-  { href: "/dashboard/period-tracker", label: "Cycle", icon: CalendarDays },
-  { href: "/dashboard/symptoms", label: "Symptoms", icon: CalendarDays },
-  { href: "/dashboard/ai-assistant", label: "Ask", icon: MessageCircle },
-  { href: "/dashboard/health-library", label: "Library", icon: BookOpen },
-  { href: "/dashboard/doctors", label: "Care", icon: MapPin },
-  { href: "/dashboard/profile", label: "Profile", icon: UserRound },
-];
-
-const mobile = items.slice(0, 5);
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const t = useCopy();
   const { locale, setLocale } = useLocale();
+  const labels = trackingCopy[locale];
+  const items = [
+    { href: "/dashboard", label: labels.navHome, icon: House },
+    { href: "/dashboard/period-tracker", label: labels.navCycle, icon: CalendarDays },
+    { href: "/dashboard/symptoms", label: labels.navSymptoms, icon: Activity },
+    { href: "/dashboard/mental-wellness", label: labels.navWellness, icon: HeartPulse },
+    { href: "/dashboard/health-reports", label: labels.navReports, icon: FileText },
+    { href: "/dashboard/reminders", label: labels.navReminders, icon: Bell },
+    { href: "/dashboard/profile", label: labels.navProfile, icon: UserRound },
+  ];
+  const mobile = [items[0], items[1], items[2], items[3], items[6]];
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const [name, setName] = useState("");

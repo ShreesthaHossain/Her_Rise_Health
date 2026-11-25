@@ -34,7 +34,7 @@ Local demo account, created only in this SQLite file:
 - Password: `CycleLog1`
 - Name: Demo Member
 
-The registration page at http://localhost:5173/register opened in Bangla and shows name, email, and password fields. The Next.js site is also running at http://localhost:3000, but the live demonstration should use the Vite site. The Next.js tracker, symptoms, assistant, and doctor pages are still placeholders.
+The registration page at http://localhost:5173/register opened in Bangla and shows name, email, and password fields. The Next.js site is also running at http://localhost:3000. Phase 3 tracking (cycle, symptoms, wellness, reports, and in-app reminders) is on the signed-in Next.js dashboard and the FastAPI account routes. Those pages need a Supabase session and a reachable account database before a saved period appears in Postgres. The Vite demonstration at port 5173 still uses its own SQLite log. Ask, library, and care on Next.js are still the earlier shells.
 
 ## Live demonstration script
 
@@ -59,7 +59,7 @@ Open http://localhost:5173.
 5. Open the log. Save a start date, an end date, a flow level, and a symptom. Show the saved row. That row is a new database record.
 6. Open the care list. Leave the district as Dhaka and show the hospital rows. Say that phone numbers are not filled in.
 
-Do not demonstrate the Next.js dashboard modules named period tracker, symptoms, or AI assistant. Those screens say the working tools are still in the Vite app. Email verification on the Next.js site is also not finished.
+The graded demonstration above is still the Vite app. The Next.js period and symptom pages save records only after a Supabase session and a reachable account database. Email verification on the Next.js site is also not finished.
 
 ## Where the three features live
 

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.routers import account, admin, consents, preferences, users
+from app.routers import account, admin, consents, preferences, tracking, users
 
 app = FastAPI(title="HerRise Health API")
 app.add_middleware(
@@ -14,6 +14,7 @@ app.add_middleware(
 )
 
 api = FastAPI()
+api.include_router(tracking.router)
 api.include_router(users.router)
 api.include_router(preferences.router)
 api.include_router(consents.router)
